@@ -15,19 +15,52 @@
 package main
 
 import (
+	"context"
+
 	"dagger/quarkus-getting-started/internal/dagger"
 )
 
-type QuarkusGettingStarted struct{}
+type QuarkusGettingStarted struct{
+	Src *dagger.Directory
+}
 
-func (m *QuarkusGettingStarted) RunJvm(
-	// +defaultPath="."
-	src *dagger.Directory,
-) *dagger.Service {
+func New(
+// +defaultPath="."
+src *dagger.Directory) *QuarkusGettingStarted {
+	return &QuarkusGettingStarted{
+		Src: src,
+	}
+}
+
+func (m *QuarkusGettingStarted) RunJvm() *dagger.Service {
 	return dag.
 		Java().
-		Quarkus(src).
+		Quarkus(m.Src).
 		JvmImage().
 		WithExposedPort(8080).
 		AsService(dagger.ContainerAsServiceOpts{UseEntrypoint: true})
+}
+
+func (m *QuarkusGettingStarted) CodeMeThatFeature(ctx context.Context, feature string) *dagger.Directory {
+	return dag.Toolbox(m.Src).Do(feature)
+}
+
+func (m *QuarkusGettingStarted) AddComments(ctx context.Context) *dagger.Directory {
+	return dag.Toolbox(m.Src).AddComments()
+}
+
+func (m *QuarkusGettingStarted) Refactor(ctx context.Context) *dagger.Directory {
+	return dag.Toolbox(m.Src).Refactor()
+}
+
+func (m *QuarkusGettingStarted) BumpDeps(ctx context.Context) *dagger.Directory {
+	return dag.Toolbox(m.Src).BumpDeps()
+}
+
+func (m *QuarkusGettingStarted) Explain(ctx context.Context) (string, error) {
+	return dag.Toolbox(m.Src).Explain(ctx)
+}
+
+func (m *QuarkusGettingStarted) FindBugs(ctx context.Context) (string, error) {
+	return dag.Toolbox(m.Src).FindBugs(ctx)
 }

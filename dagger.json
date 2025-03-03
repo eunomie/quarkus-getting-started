@@ -1,6 +1,6 @@
 {
   "name": "quarkus-getting-started",
-  "engineVersion": "v0.16.2",
+  "engineVersion": "v0.17.0-llm.4",
   "sdk": {
     "source": "go"
   },
@@ -9,6 +9,11 @@
       "name": "java",
       "source": "github.com/eunomie/java",
       "pin": "1e87295c893a39de79112ac8f9ea473e1b574f25"
+    },
+    {
+      "name": "toolbox",
+      "source": "github.com/eunomie/toolbox",
+      "pin": "5f65357fd548c6b4b3e42cacb99cd23b85006e5a"
     }
   ],
   "source": ".dagger"
