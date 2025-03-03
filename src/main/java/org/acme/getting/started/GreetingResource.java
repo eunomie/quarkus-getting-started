@@ -18,6 +18,13 @@ public class GreetingResource {
     public String greeting(String name) {
         return service.greeting(name);
     }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/bonjour/{name}")
+    public String bonjour(String name) {
+        return service.frenchGreeting(name);
+    }
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

@@ -31,5 +31,16 @@ public class GreetingResourceTest {
                 .statusCode(200)
                 .body(is("hello " + uuid));
     }
-
+    
+    // New test for bonjour endpoint
+    @Test
+    public void testBonjourEndpoint() {
+        String uuid = UUID.randomUUID().toString();
+        given()
+                .pathParam("name", uuid)
+                .when().get("/hello/bonjour/{name}")
+                .then()
+                .statusCode(200)
+                .body(is("bonjour " + uuid));
+    }
 }
