@@ -1,0 +1,5 @@
+#!/usr/bin/env -S dagger shell --no-mod
+
+.use ${0%/run-jvm}/..
+
+run-jvm | up
